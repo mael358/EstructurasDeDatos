@@ -3,7 +3,7 @@
 
 struct Array
 {
-    int *A;
+    int A[10];
     int size;
     int length;
 };
@@ -37,26 +37,27 @@ void Insert(struct Array *arr, int index, int x)
     }
 }
 
+int Delete(struct Array *arr, int index)
+{
+    int x = 0;
+    if (index >= 0 && index < arr->length)
+    {
+        x = arr->A[index];
+        for (int i = index; i < arr->length - 1; i++)
+            arr->A[i] = arr->A[i + 1];
+        arr->length--;
+        return x;
+    }
+    return 0;
+}
+
 int main()
 {
-    struct Array arr;
-    int n,i;
-    printf("Enter size of an Array \n");
-    scanf("%d", &arr.size);
-    arr.A = (int *)malloc(arr.size * sizeof(int));
-    arr.length = 0;
-
-    printf("Enter number of numbers \n");
-    scanf("%d", &n);
-
-    printf("Enter numbers %d \n", i + 1);
-    for (i = 0; i < n; i++)
-        scanf("%d", &arr.A[i]);
-
-    arr.length = n;
+    struct Array arr = {{2, 3, 4, 5, 6}, 10, 5};
 
     //Append(&arr, 10);
-    Insert(&arr, 5, 10);
+    //Insert(&arr, 5, 10);
+    printf("%d\n", Delete(&arr, 4));
     Display(arr);
 
 
