@@ -91,6 +91,70 @@ int BinarySearch(struct Array arr, int key)
     return -1;
 }
 
+int Get(struct Array arr, int index)
+{
+    if (index >= 0 && index <= arr.length)
+        return arr.A[index];
+    return -1;
+}
+
+void Set(struct Array *arr, int index, int value)
+{
+    if (index >= 0 && index <= arr->length)
+        arr->A[index] = value;
+}
+
+int Max(struct Array arr)
+{
+    int max = arr.A[0];
+    for (int i = 1; i < arr.length; i++)
+        if (arr.A[i] > max)
+            max = arr.A[i];
+    return max;
+}
+
+int Min(struct Array arr)
+{
+    int min = arr.A[0];
+    for (int i = 1; i < arr.length; i++)
+        if (arr.A[i] < min)
+            min = arr.A[i];
+    return min;
+}
+
+int Sum(struct Array arr)
+{
+    int sum = 0;
+    for (int i; i < arr.length; i++)
+        sum += arr.A[i];
+    return sum;
+}
+
+float Avg(struct Array arr)
+{
+    return (float) Sum(arr) / arr.length;
+}
+
+void Reverse(struct Array *arr)
+{
+    int *B;
+    int i, j;
+
+    B = (int *) malloc(arr->length * sizeof(int));
+    for (i = arr->length - 1, j = 0; i >= 0; i--, j++)
+        B[j] = arr->A[i];
+
+    for (i = 0; i < arr->length; i++)
+        arr->A[i] = B[i];
+
+}
+
+void Reverse2(struct Array *arr)
+{
+    for (int i = 0, j = arr->length - 1; i < j; i++, j--)
+        Swap(&arr->A[i], &arr->A[j]);
+}
+
 int main()
 {
     struct Array arr = {{2, 3, 4, 5, 6}, 10, 5};
@@ -99,9 +163,11 @@ int main()
     //Insert(&arr, 5, 10);
     //printf("%d\n", Delete(&arr, 4));
     //printf("%d\n", LinearSearch(&arr, 5));
-    printf("%d\n", BinarySearch(arr, 10));
+    //printf("%d\n", BinarySearch(arr, 10));
+    //printf("%f\n", Avg(arr));
+    Reverse2(&arr);
     Display(arr);
 
-
+    printf("\n\n\n\n\n\n\n\n\n\n");
     return 0;
 }
