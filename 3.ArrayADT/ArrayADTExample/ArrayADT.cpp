@@ -3,7 +3,7 @@
 
 struct Array
 {
-    int A[10];
+    int *A;
     int size;
     int length;
 };
@@ -303,36 +303,58 @@ struct Array* Difference(struct Array *arr1, struct Array *arr2)
 
 int main()
 {
-    //struct Array arr = {{2, -3, 25, 10, -15, -7}, 10, 6};
+    struct Array arr1;
+    int ch;
+    int x, index;
 
-    //Append(&arr, 10);
-    //Insert(&arr, 5, 10);
-    //printf("%d\n", Delete(&arr, 4));
-    //printf("%d\n", LinearSearch(&arr, 5));
-    //printf("%d\n", BinarySearch(arr, 10));
-    //printf("%f\n", Avg(arr));
-    //Reverse2(&arr);
-    //InsertSort(&arr, 1);
-    //printf("%d \n", isSorted(arr));
-    //ReArrange(&arr);
-    //Display(arr);
+    printf("Enter size of Array: ");
+    scanf("%d", &arr1.size);
+    arr1.A = (int *)malloc(arr1.size * sizeof(int));
 
-    // Sorted arrays
-    // struct Array arr1 = {{2,6,10,15,25}, 10, 5};
-    // struct Array arr2 = {{3,4,7,18,20}, 10, 5};
+    do 
+    {
+        printf("Menu\n");
+        printf("1. Insert\n");
+        printf("2. Delete\n");
+        printf("3. Search\n");
+        printf("4. Sum\n");
+        printf("5. Display\n");
+        printf("6.Exit\n");
+    
+        printf("enter you choice ");
+        scanf("%d",&ch);
 
-    // Union arrays
-    // struct Array arr1 = {{2,6,10,15,25}, 10, 5};
-    // struct Array arr2 = {{3,6,7,15,20}, 10, 5};
+        switch(ch)
+        {
+        case 1: 
+            printf("Enter an element and index");
+            scanf("%d%d",&x,&index);
+            Insert(&arr1,index,x);
+        break;
+        case 2: 
+            printf("Enter index ");
+            scanf("%d",&index);
+            x=Delete(&arr1,index);
+            printf("Deleted Element is %d\n",x);
+        break;
+        case 3:
+            printf("Enter element to search ");
+            scanf("%d",&x);
+            index=LinearSearch(&arr1,x);
+            printf("Element index %d",index);
+        break;
+        case 4:
+            printf("Sum is %d\n",Sum(arr1));
+        break;
+        case 5:
+            Display(arr1);
+        }
 
-    // Intersection arrays
-    struct Array arr1 = {{2,6,10,15,25}, 10, 5};
-    struct Array arr2 = {{3,6,7,15,20}, 10, 5};
 
-    struct Array *arr3 = Difference(&arr1, &arr2);
 
-    Display(*arr3);
+    } while(ch < 6);
 
+    // Standard space
     printf("\n\n\n\n\n\n\n\n\n\n");
     return 0;
 }
